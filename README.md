@@ -9,16 +9,16 @@ Tema desarrollado para el proyecto Piedra Tijera Papel. Usa Webpack y SCSS.
 ## Configuración
 
 ## Desarrollo
-**Descargar este repositorio**
+**Descargar este repositorio**  
 `git clone https://github.com/piedratijerapapel/papel.git`
 
-**Instalar dependencias**
+**Instalar dependencias**  
 `yarn install`
 
-**Iniciar en modo de desarrollo**
+**Iniciar en modo de desarrollo**  
 `yarn start`
 
-**Exportar optimizado para producción**
+**Exportar optimizado para producción**  
 `yarn build`
 
 ## Licencia
