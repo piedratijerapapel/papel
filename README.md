@@ -1,5 +1,5 @@
 # Papel
-Tema **Papel** para [Grav CMS](http://github.com/getgrav/grav).
+Tema **Papel** para [Automad CMS](https://automad.org).
 
 ## Descripción
 Tema desarrollado para el proyecto Piedra Tijera Papel. Usa Webpack y SCSS.

@@ -1,8 +1,8 @@
 {
   "name": "papel",
   "version": "1.0.0",
-  "description": "Plantilla de Grav para Piedra Tijera Papel",
-  "main": "index.js",
+  "description": "Plantilla de Automad para Piedra Tijera Papel",
+  "main": "src/index.js",
   "repository": "https://github.com/piedratijerapapel/papel",
   "author": "Juan Camilo González <info@juancgonzalez.com> (http://juancgonzalez.com)",
   "license": "MIT",
