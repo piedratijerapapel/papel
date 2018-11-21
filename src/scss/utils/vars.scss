@@ -1,0 +1,22 @@
+$fontColor: #333333;
+$titleColor: #454B4D;
+$linkColor: rgb(105, 104, 104);
+$fontSansSerif: 'Rubik',
+'Helvetica Neue',
+Helvetica,
+Arial,
+sans-serif;
+
+@font-face {
+  font-family: 'Croydon';
+  src: url('fonts/Croydon.woff2') format('woff2'), url('fonts/Croydon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Trujillo';
+  src: url('fonts/Trujillo.woff2') format('woff2'), url('fonts/Trujillo.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
