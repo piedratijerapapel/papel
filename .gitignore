@@ -1,4 +1,6 @@
 /node_modules/
 .DS-Store
-
 .vscode
+_data/
+dist/*
+!dist/polymaps.min.js
