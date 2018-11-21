@@ -17,6 +17,7 @@
     "babel-loader": "^8.0.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
     "mini-css-extract-plugin": "^0.4.2",
     "node-sass": "^4.9.3",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -28,5 +29,9 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7",
     "write-file-webpack-plugin": "^4.4.1"
+  },
+  "dependencies": {
+    "justified-layout": "^2.1.1",
+    "lazysizes": "^4.1.4"
   }
 }
