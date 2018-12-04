@@ -8,6 +8,7 @@ import Tapiz from './js/components/Tapiz';
 import Abc from './js/components/Abc';
 import {getParams} from './js/utils/helpers';
 import ResultadoBusqueda from './js/components/ResultadoBusqueda';
+import Logo from './js/components/Logo';
 //import Buscar from './js/utils/Buscar';
 
 /**
@@ -68,5 +69,11 @@ if (logo) {
       logo.style.height = '130px';
       logo.style.marginTop = '1em';
     }
+  };
+} else {
+  const logoConatiner = document.getElementById('homeLogo');
+
+  if (logoConatiner) {
+    new Logo(logoConatiner);
   }
 }
