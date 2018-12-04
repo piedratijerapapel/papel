@@ -2,6 +2,7 @@
 
 <@ parts/head.php @>
   <!--p>@{ text | markdown }</p-->
+  <img id="homeLogo" src="/shared/logos.gif" alt="">
   <div class="viewOptions">
     <a class="filterIcon iconTags" href="/filtros"></a>
     <a class="filterIcon iconImg iconImgs" href="/filtros?filter=imgs"></a>

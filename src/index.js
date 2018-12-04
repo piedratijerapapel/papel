@@ -1,4 +1,5 @@
 import './main.scss';
+// lazysizes needs to be loaded globally
 import lazyload from 'lazysizes';
 import Tijera from './js/utils/Tijera';
 import Tags from './js/components/Tags';
@@ -12,8 +13,11 @@ import ResultadoBusqueda from './js/components/ResultadoBusqueda';
 /**
  * TODO:
  * - Implement search class when photos are public.
+ * - include autocomplete based on search levels: global, themes, authors, tags, etc.
  */
 //const search = new Buscar();
+
+let logo = document.getElementById('ptpLogo');
 
 if (document.querySelector('.filter')) {
   if (typeof flickrData !== 'undefined' && flickrData.length) {
@@ -44,4 +48,25 @@ if (document.querySelector('.filter')) {
   }
 } else if (document.querySelector('.viz')) {
   new Mapa('GM22261');
+}
+
+if (logo) {
+  let menu = document.getElementById('menu');
+  let nav = document.querySelector('.navContent');
+
+  menu.onclick = () => {
+    menu.classList.toggle('on');
+    nav.classList.toggle('on');
+  };
+
+  window.onscroll = () => {
+    const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
+    if (scrolled > 50) {
+      logo.style.height = '50px';
+      logo.style.marginTop = '.3em';
+    } else {
+      logo.style.height = '130px';
+      logo.style.marginTop = '1em';
+    }
+  }
 }

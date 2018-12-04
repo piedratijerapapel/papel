@@ -1,6 +1,6 @@
 <?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html id="papel" lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,18 +15,19 @@
   </script>
 </head>
 
-<body class="papel gridWrapper gridJustifySpaceBetween @{ :template | sanitize }">
-  <div id="siteBanner" class="m-50 t-40 d-30 ld-20">
-    <a href="/" class="ptpLogo">
-    <@ with @{ logo | def('/shared/*logo*') } @>
-      <img 
-        src="<@ with @{ :file } { height: @{ logoHeight | def (150) } } @>@{ :fileResized }<@ end @>" 
-        srcset="<@ with @{ :file } { height: @{ logoHeight | def (150) | *2 } } @>@{ :fileResized } 2x<@ end @>"
-        alt="@{ :basename }"
-      >
-    <@ else @>@{ sitename }<@ end @>
-    </a>
-    <h3 class="siteSubtitle">@{sitesubtitle}</h3>
-  </div>
-<@ nav.php @>
-  <main class="contentWrapper m-50 t-60 d-70 ld-80">
+<body>
+  <@if @{checkbox_home} @>
+  <@ else @>
+  <header id="siteHeader" class="gridWrapper gridJustifySpaceBetween">
+    <span id="menu"><span></span></span>
+    <div id="search">
+      <input id="searchField" type="text" placeholder="Buscar">
+      <button id="submit"></button>
+    </div>
+  </header>
+  <a href="/" id="ptpLogoWrapper">
+    <img id="ptpLogo" src="/shared/logo.png" alt="">
+  </a>
+  <@ nav.php @>
+  <@ end @>
+  <main class="@{ :template | sanitize } contentWrapper m-100 t-100 d-100 ld-100">
