@@ -1,14 +1,22 @@
 @import 'scss/utils/vars.scss';
-@import 'scss/utils/grid.scss';
-@import 'scss/breakpoints/base.scss';
-@media only screen and (min-width: 768px) {
-  @import 'scss/breakpoints/768up.scss';
-}
 
-@media only screen and (min-width: 1030px) {
-  @import 'scss/breakpoints/1030up.scss';
-}
-
-@media only screen and (min-width: 1240px) {
-  @import 'scss/breakpoints/1240up.scss';
+#papel {
+  box-sizing: border-box;
+  font: 400 1rem 'Times New Roman', Times, serif;
+  line-height: 1.7;
+  color: black;
+  background: white;
+  margin: 0;
+  @import 'scss/utils/general.scss';
+  @import 'scss/utils/grid.scss';
+  @import 'scss/breakpoints/base.scss';
+  @media only screen and (min-width: 768px) {
+    @import 'scss/breakpoints/768up.scss';
+  }
+  @media only screen and (min-width: 1030px) {
+    @import 'scss/breakpoints/1030up.scss';
+  }
+  @media only screen and (min-width: 1240px) {
+    @import 'scss/breakpoints/1240up.scss';
+  }
 }
