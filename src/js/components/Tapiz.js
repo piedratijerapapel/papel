@@ -1,10 +1,12 @@
 import layoutGeometry from 'justified-layout';
+import {shuffleArray} from '../utils/helpers';
 
 export default class Tapiz {
   constructor(imgsData, container) {
     this.container = container || document.getElementById('filtersContent');
     let imgRatios = [];
     let imgs = [];
+    shuffleArray(imgsData);
 
     imgsData.forEach(d => {
       let link = document.createElement('a');
