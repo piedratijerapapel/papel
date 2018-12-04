@@ -3156,6 +3156,11 @@ indexof@0.0.1:
   resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
   integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
 
+infinite-autocomplete@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/infinite-autocomplete/-/infinite-autocomplete-3.2.1.tgz#58c0cc4724c5feaea41ff78e33dc6d0ca523170b"
+  integrity sha1-WMDMRyTF/q6kH/eOM9xtDKUjFws=
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
