@@ -102,7 +102,6 @@ export default class Tijera {
         } else {
           abc[groupI].terms.push(term);
         }
-
       }
     });
 
