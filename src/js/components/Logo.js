@@ -4,23 +4,23 @@ export default class Logo {
     this.counter = 0;
     this.currentFrame = 0;
     this.data = {
-      filename: 'logos_7x1-1679x200-1.png',
-      width: 1679,
+      url: 'logosSprite_7x1-1680x200-1.png',
+      width: 1680,
       height: 200,
       frames: [
-        {x: 0, y: 0, w: 239, h: 200},
-        {x: 239, y: 0, w: 239, h: 200},
-        {x: 478, y: 0, w: 239, h: 200},
-        {x: 717, y: 0, w: 239, h: 200},
-        {x: 956, y: 0, w: 239, h: 200},
-        {x: 1195, y: 0, w: 239, h: 200},
-        {x: 1434, y: 0, w: 239, h: 200}
+        {x: 0, y: 0, w: 240, h: 200},
+        {x: 240, y: 0, w: 240, h: 200},
+        {x: 480, y: 0, w: 240, h: 200},
+        {x: 720, y: 0, w: 240, h: 200},
+        {x: 960, y: 0, w: 240, h: 200},
+        {x: 1200, y: 0, w: 240, h: 200},
+        {x: 1440, y: 0, w: 240, h: 200}
       ]
     };
 
     this.sprite = new Image();
     this.sprite.onload = this.init;
-    this.sprite.src = `/shared/${this.data.filename}`;
+    this.sprite.src = `/shared/${this.data.url}`;
   }
 
   init = () => {
@@ -43,7 +43,7 @@ export default class Logo {
     let timeout = 800;
 
     if (this.counter === 3) {
-      timeout = 1500;
+      timeout = 2000;
       this.counter = 0;
     }
 

@@ -18,10 +18,36 @@ import Logo from './js/components/Logo';
  */
 //const search = new Buscar();
 
+const logoConatiner = document.getElementById('homeLogo');
 let logo = document.getElementById('ptpLogo');
+let menu = document.getElementById('menu');
+let nav = document.querySelector('.navContent');
+
+if (logoConatiner) {
+  new Logo(logoConatiner);
+}
+
+menu.onclick = () => {
+  menu.classList.toggle('on');
+  nav.classList.toggle('on');
+};
+
+if (logo) {
+  window.onscroll = () => {
+    const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
+    if (scrolled > 50) {
+      logo.style.height = '50px';
+      logo.style.marginTop = '.3em';
+    } else {
+      logo.style.height = '130px';
+      logo.style.marginTop = '1em';
+    }
+  };
+}
 
 if (document.querySelector('.filter')) {
   if (typeof flickrData !== 'undefined' && flickrData.length) {
+    console.log(flickrData);
     const params = getParams(window.location.search);
     const filtersNav = document.getElementById('filtersNav');
     const tijera = new Tijera(flickrData);
@@ -49,31 +75,4 @@ if (document.querySelector('.filter')) {
   }
 } else if (document.querySelector('.viz')) {
   new Mapa('GM22261');
-}
-
-if (logo) {
-  let menu = document.getElementById('menu');
-  let nav = document.querySelector('.navContent');
-
-  menu.onclick = () => {
-    menu.classList.toggle('on');
-    nav.classList.toggle('on');
-  };
-
-  window.onscroll = () => {
-    const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
-    if (scrolled > 50) {
-      logo.style.height = '50px';
-      logo.style.marginTop = '.3em';
-    } else {
-      logo.style.height = '130px';
-      logo.style.marginTop = '1em';
-    }
-  };
-} else {
-  const logoConatiner = document.getElementById('homeLogo');
-
-  if (logoConatiner) {
-    new Logo(logoConatiner);
-  }
 }

@@ -16,8 +16,6 @@
 </head>
 
 <body>
-  <@if @{checkbox_home} @>
-  <@ else @>
   <header id="siteHeader" class="gridWrapper gridJustifySpaceBetween">
     <span id="menu"><span></span></span>
     <div id="search">
@@ -25,9 +23,12 @@
       <button id="submit"></button>
     </div>
   </header>
-  <a href="/" id="ptpLogoWrapper">
-    <img id="ptpLogo" src="/shared/logo.png" alt="">
-  </a>
   <@ nav.php @>
+  <@if @{checkbox_home} @>
+  <@ else @>
+  <a href="/" id="ptpLogoWrapper">
+    <img id="ptpLogo" src="/shared/cuadratin.png" alt="">
+  </a>
   <@ end @>
   <main class="@{ :template | sanitize } contentWrapper m-100 t-100 d-100 ld-100">
+    
