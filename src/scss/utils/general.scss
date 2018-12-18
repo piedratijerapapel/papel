@@ -51,7 +51,39 @@ h3,
 h4,
 h5,
 h6 {
-  color: black;
+  font-family: $fontBold;
+  color: $fontColor;
+  margin: 1em 0;
+}
+
+em {
+  color: $fontColor;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+p {
+  margin: 1.3em 0;
+  a,
+  a:visited {
+    color: $linkContentColor;
+    text-decoration: none;
+    transition: all 0.25s ease-in-out;
+    &:hover,
+    &:focus {
+      color: lighten($linkColor, 10%);
+    }
+  }
 }
 
 a,
@@ -61,20 +93,17 @@ a:visited {
   transition: all 0.25s ease-in-out;
   &:hover,
   &:focus {
-    color: darken($linkColor, 8%);
+    color: lighten($linkColor, 10%);
   }
 }
 
-pre {
-  background: #F0F0F0;
-  margin: 1rem 0;
-  border-radius: 2px;
-}
-
 blockquote {
-  border-left: 10px solid #eee;
-  margin: 0;
+  border: none;
+  margin: 2em 1em;
   padding: 0 2rem;
+  line-height: 1.2;
+  font-size: 1.1em;
+  font-style: italic;
 }
 
 .wrapper {
@@ -153,4 +182,8 @@ nav {
       transform: rotate(-45deg) translate(7px, -8px);
     }
   }
+}
+
+.blockCenter {
+  margin: 0 auto;
 }
