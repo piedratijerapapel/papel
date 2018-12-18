@@ -72,7 +72,8 @@ export default class ResultadoBusqueda {
 
     let bigImg = new Image();
     bigImg.onload = () => {
-      let description = data.description.replace(/(?!^)<b>/g, '<br><b>');
+      let description = data.description.replace(/<b>/g, '</span></div><div class="dataRow"><span class="dataCol dataTitle">');
+      description = description.replace(/<\/b>/g, '</span><span class="dataCol dataValue">');
       imgContainer.appendChild(bigImg);
       imgData.insertAdjacentHTML('afterbegin', description);
     };
