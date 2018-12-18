@@ -1,6 +1,6 @@
 <?php
 
-function getAllImages($flickr, $arr, $perPage, $page) {
+function getAllImages($flickr, $arr, $rawTags, $perPage, $page) {
   $flickrReq = $flickr->people_getPhotos('me', array(
     'per_page' => $perPage,
     'page' => $page,
@@ -8,13 +8,20 @@ function getAllImages($flickr, $arr, $perPage, $page) {
   ));
 
   if ($flickrReq['stat'] == 'ok') {
-    $photos = $flickrReq['photos'];
+    foreach ($flickrReq['photos']['photo'] as $key => $photo) {
+      $tags = explode(' ', $photo['tags']);
 
-    if ($photos['page'] < $photos['pages']) {
-      $arr = array_merge($arr, $photos['photo']);
-      return getAllImages($flickr, $arr, $perPage, ++$photos['page']);
+      foreach ($tags as $i => $tag) {
+        $tags[$i] = array_key_exists($tag, $rawTags) ? $rawTags[$tag] : $tag;
+      }
+      $flickrReq['photos']['photo'][$key]['tags'] = $tags;
+    }
+
+    if ($flickrReq['photos']['page'] < $flickrReq['photos']['pages']) {
+      $arr = array_merge($arr, $flickrReq['photos']['photo']);
+      return getAllImages($flickr, $arr, $rawTags, $perPage, ++$flickrReq['photos']['page']);
     } else {
-      $arr = array_merge($arr, $photos['photo']);
+      $arr = array_merge($arr, $flickrReq['photos']['photo']);
       return $arr;
     }
   }

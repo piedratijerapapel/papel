@@ -10,10 +10,11 @@ export default class Tijera {
   separateTags() {
     this.rawData.forEach(imgObj => {
       if (imgObj.tags) {
-        const raw = imgObj.tags.split(' ');
+        const raw = imgObj.tags;
 
         raw.forEach(term => {
           if (!term.includes(':') && !term.includes('=')) {
+            term = term.replace(/_/g, ' ');
             let pos = this.terms.findIndex(obj => obj.name === term);
 
             if (pos < 0) {
@@ -48,7 +49,7 @@ export default class Tijera {
                   this.categories[firstLevelTerm][secondLevelTerm] = {};
                 }
 
-                const value = secondLevelSplit[1];
+                const value = secondLevelSplit[1].replace(/_/g, ' ');
 
                 if (!this.categories[firstLevelTerm][secondLevelTerm].hasOwnProperty(value)) {
                   this.categories[firstLevelTerm][secondLevelTerm][value] = [];
@@ -56,10 +57,12 @@ export default class Tijera {
 
                 this.categories[firstLevelTerm][secondLevelTerm][value].push(imgObj);
               } else {
-                console.error(`Term: ${term}, has multiple or none '=', can't identify the second level category`);
+                console.error(`Term: ${term}, has multiple or no '=', can't identify the second level category`);
+                console.error(`Image url: https://www.flickr.com/photos/${imgObj.owner}/${imgObj.id}`);
               }
             } else {
-              console.error(`Term: ${term} has multiple or none ':', can't identify first level category`);
+              console.error(`Term: ${term} has multiple or no ':', can't identify first level category`);
+              console.error(`Image url: https://www.flickr.com/photos/${imgObj.owner}/${imgObj.id}`);
             }
           }
         });
@@ -113,10 +116,9 @@ export default class Tijera {
   }
 
   getRelatedTags(terms) {
-    const raw = terms.split(' ');
     let related = [];
 
-    raw.forEach(term => {
+    terms.forEach(term => {
       if (!term.includes(':') && !term.includes('=')) {
         related.push(this.terms.find(obj => obj.name === term));
       }

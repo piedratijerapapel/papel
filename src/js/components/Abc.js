@@ -5,7 +5,6 @@ export default class Abc {
     this.container.classList.add('gridWrapper');
 
     this.buildGroups();
-    console.log(tags);
   }
 
   buildGroups() {
@@ -22,7 +21,7 @@ export default class Abc {
         let termEle = document.createElement('a');
         termEle.className = 'abcTerm';
         termEle.innerText = `${term.name} (${term.count})`;
-        termEle.href = `/filtros?filter=search&mode=term&val=${term.name}`;
+        termEle.href = `/filtros?filter=search&mode=term&val=${encodeURIComponent(term.name)}`;
         container.appendChild(termEle);
       });
 

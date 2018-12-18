@@ -13,14 +13,15 @@ export default class Tags {
   parseTags(tags, container) {
     tags = tags || this.tags;
     container = container || this.container;
-
     tags.forEach(tag => {
-      let ele = document.createElement('a');
-      ele.className = 'tagName';
-      ele.style.fontSize = `${mapNumber(tag.count, 1, this.max, 14, 60)}px`;
-      ele.innerText = `${tag.name} (${tag.count})`;
-      ele.href = `/filtros?filter=search&mode=term&val=${tag.name}`;
-      container.appendChild(ele);
+      if (tag) {
+        let ele = document.createElement('a');
+        ele.className = 'tagName';
+        ele.style.fontSize = `${mapNumber(tag.count, 1, this.max, 14, 60)}px`;
+        ele.innerText = `${tag.name} (${tag.count})`;
+        ele.href = `/filtros?filter=search&mode=term&val=${encodeURIComponent(tag.name)}`;
+        container.appendChild(ele);
+      }
     });
   }
 }

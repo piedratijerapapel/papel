@@ -16,7 +16,15 @@ if (empty($cached)) {
   $logedIn = $flickr->requestOauthToken();
 
   if ($logedIn) {
-    $imgs = getAllImages($flickr, array(), 200, 1);
+    $rawTagsReq = $flickr->tags_getListUserRaw();
+    $rawTags = array();
+
+    if ($rawTagsReq['stat'] == 'ok') {
+      foreach ($rawTagsReq['who']['tags']['tag'] as $tag) {
+        $rawTags[$tag['clean']] = $tag['raw'][0];
+      }
+    }
+    $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
     $json = json_encode($imgs);
     $cached .= $imgs;
     file_put_contents($file, $json);
