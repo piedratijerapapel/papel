@@ -24,11 +24,10 @@
     </div>
   </header>
   <@ nav.php @>
-  <@if @{checkbox_home} @>
-  <@ else @>
-  <a href="/" id="ptpLogoWrapper">
-    <img id="ptpLogo" src="/shared/cuadratin.png" alt="">
-  </a>
+  <@if @{:template} != 'papel' @>
+    <a href="/" id="ptpLogoWrapper">
+      <img id="ptpLogo" src="/shared/cuadratin.png" alt="PTP">
+    </a>
   <@ end @>
   <main class="@{ :template | sanitize } contentWrapper m-100 t-100 d-100 ld-100">
     
