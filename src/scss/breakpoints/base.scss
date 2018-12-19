@@ -141,67 +141,51 @@
   }
 }
 
-.info {
-  display: none;
-  position: fixed;
-  background-color: rgba(255, 255, 255, .95);
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  height: 100%;
-  padding: 5em;
-  overflow: auto;
-  z-index: 9;
-  .close {
-    font-size: 1.5em;
-    position: fixed;
-    top: 15px;
-    right: 30px;
-    cursor: pointer;
-  }
-  .thumb {
+#filtersNav {
+  text-align: center;
+  margin-bottom: 2em;
+  li {
     display: inline-block;
     vertical-align: top;
-    cursor: pointer;
+    text-indent: -9999px;
+    a {
+      width: 30px;
+      height: 44px;
+      display: block;
+      background-color: white;
+      background-position: center;
+      background-repeat: no-repeat;
+      &:hover {
+        background-color: #d3d3d3;
+      }
+    }
+    &.active a {
+      background-color: #dbdbdb;
+    }
   }
-}
-
-.filterIcon {
-  background-color: white;
-  cursor: pointer;
-  &:hover {
-    background-color: #d3d3d3;
+  .filterByImage a {
+    background-image: url('assets/icon-img.svg');
+    background-size: 70%;
   }
-  &.active {
-    background-color: #dbdbdb;
+  .filterByIndex a {
+    background-image: url('assets/icon-abc.svg');
+    background-size: 70%;
   }
-}
-
-.iconImg {
-  background-position: center;
-  display: block;
-  background-repeat: no-repeat;
-}
-
-.iconImgs {
-  background-image: url('assets/icon-img.svg');
-  background-size: 70%;
-}
-
-.iconAbc {
-  background-image: url('assets/icon-abc.svg');
-  background-size: 70%;
-}
-
-.iconTags {
-  position: relative;
-  &::before {
-    content: 'T';
-    font-family: $fontBold;
-    font-weight: normal;
-    position: absolute;
-    color: black;
+  .filterByTag a {
+    position: relative;
+    &::before {
+      content: 'T';
+      text-indent: 0;
+      font-family: $fontBold;
+      font-weight: normal;
+      position: absolute;
+      color: black;
+      width: 100%;
+      height: 100%;
+      font-size: 25px;
+      left: 1px;
+      top: 1px;
+    }
   }
 }
 
@@ -284,26 +268,6 @@
   }
 }
 
-#filtersNav {
-  text-align: center;
-  .filterIcon {
-    width: 30px;
-    height: 44px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: left;
-    &.iconTags {
-      &::before {
-        width: 100%;
-        height: 100%;
-        font-size: 25px;
-        left: 7px;
-        top: 1px;
-      }
-    }
-  }
-}
-
 .abcGroup {
   padding: 0 3em;
   .abcTerm {
@@ -322,13 +286,10 @@
     font-weight: 800;
     font-style: normal;
     width: 100%;
-    //display: table;
     .dataRow {
       line-height: 1.3;
       .dataCol {
-        //display: inline-block;
         vertical-align: top;
-        // width: 80%;
         &.dataTitle {
           width: 20%;
           padding-right: 2em;
