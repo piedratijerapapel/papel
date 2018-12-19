@@ -107,7 +107,7 @@
       margin: 2em 0 3em 0;
       display: block;
     }
-    .homeTerm {
+    .viewOptions {
       font-family: $fontBold;
       font-weight: 800;
       font-size: 3em;
@@ -115,7 +115,6 @@
       text-align: left;
       font-style: normal;
       display: block;
-      color: black !important;
     }
     .homeContentLogo {
       width: 60px;
@@ -206,24 +205,6 @@
   }
 }
 
-// .viewOptions {
-//   .filterIcon {
-//     display: inline-block;
-//     vertical-align: top;
-//     width: 7vw;
-//     height: 11vw;
-//     margin: 1em;
-//   }
-//   .iconTags {
-//     &::before {
-//       width: 7vw;
-//       height: 11vw;
-//       font-size: 7vw;
-//       left: 0;
-//       top: -.5vw;
-//     }
-//   }
-// }
 #map {
   width: 100%;
   height: 100vh;
@@ -326,7 +307,6 @@
 .abcGroup {
   padding: 0 3em;
   .abcTerm {
-    //padding: 0 .5em;
     display: inline-block;
     cursor: pointer;
   }
@@ -341,13 +321,18 @@
     font-family: $fontBold;
     font-weight: 800;
     font-style: normal;
-    display: table;
+    width: 100%;
+    //display: table;
     .dataRow {
       line-height: 1.3;
       .dataCol {
-        display: inline-block;
-        width: 45%;
+        //display: inline-block;
         vertical-align: top;
+        // width: 80%;
+        &.dataTitle {
+          width: 20%;
+          padding-right: 2em;
+        }
       }
     }
     br {

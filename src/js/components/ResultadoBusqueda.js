@@ -24,7 +24,7 @@ export default class ResultadoBusqueda {
   buildImgPage() {
     let data = flickrData.find(obj => obj.id === this.params.val);
     let imgContainer = document.createElement('section');
-    let imgData = document.createElement('section');
+    let imgData = document.createElement('table');
     let tagsSection = document.createElement('section');
     let relatedImgs = document.createElement('section');
 
@@ -72,8 +72,8 @@ export default class ResultadoBusqueda {
 
     let bigImg = new Image();
     bigImg.onload = () => {
-      let description = data.description.replace(/<b>/g, '</span></div><div class="dataRow"><span class="dataCol dataTitle">');
-      description = description.replace(/<\/b>/g, '</span><span class="dataCol dataValue">');
+      let description = data.description.replace(/<b>/g, '</td></tr><tr class="dataRow"><td class="dataCol dataTitle">');
+      description = description.replace(/<\/b>/g, '</td><td class="dataCol dataValue">');
       imgContainer.appendChild(bigImg);
       imgData.insertAdjacentHTML('afterbegin', description);
     };
