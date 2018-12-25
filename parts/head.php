@@ -9,10 +9,6 @@
 	<@ favicons.php @>
 	<link href="/packages/ptp/papel/dist/main.css" rel="stylesheet">
   @{ itemsHeader }
-  <script>
-    const flickrApiKey='@{ flickr_api_key }';
-    const flickrUserId='@{ flickr_user_id }';
-  </script>
 </head>
 
 <body>
