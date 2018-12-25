@@ -33,16 +33,22 @@ menu.onclick = () => {
   nav.classList.toggle('on');
 };
 
+function updateLogoSize() {
+  const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
+  if (scrolled > 50) {
+    logo.style.height = '50px';
+    logo.style.marginTop = '.3em';
+  } else {
+    logo.style.height = '130px';
+    logo.style.marginTop = '1em';
+  }
+}
+
 if (logo) {
+  updateLogoSize();
+
   window.onscroll = () => {
-    const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
-    if (scrolled > 50) {
-      logo.style.height = '50px';
-      logo.style.marginTop = '.3em';
-    } else {
-      logo.style.height = '130px';
-      logo.style.marginTop = '1em';
-    }
+    updateLogoSize();
   };
 }
 
@@ -57,10 +63,6 @@ if (document.querySelector('.filter')) {
     } else if (main.classList.contains('filterbyindex')) {
       new Abc(tijera.sortTagsAlphabetically());
     } else if (params.filter === 'search') {
-      // if (params.mode === 'term') {
-      //   tagsEle.classList.add('active');
-      // }
-
       new ResultadoBusqueda(params, tijera);
     } else {
       new Tags(tijera.getTagsByWeight(), document.getElementById('filtersContent'), tijera.maxTermCount);
