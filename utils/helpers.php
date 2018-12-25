@@ -1,4 +1,5 @@
 <?php
+require_once 'Flickr.php';
 
 function getAllImages($flickr, $arr, $rawTags, $perPage, $page) {
   $flickrReq = $flickr->people_getPhotos('me', array(
@@ -44,4 +45,36 @@ function normalize($string) {
   );
 
   return strtr($string, $table);
+}
+
+function getFlickrData($Automad) {
+  $file = realpath(__DIR__ . '/../_data/cacheflickr.json');
+  $Page = $Automad->Context->get();
+  $cached = file_get_contents($file);
+
+  if (empty($cached)) {
+    $apiKey = $Page->Shared->data['flickr_api_key'];
+    $apiSecret = $Page->Shared->data['flickr_api_secret'];
+    $flickr = new Flickr($apiKey, $apiSecret);
+
+    $logedIn = $flickr->requestOauthToken();
+
+    if ($logedIn) {
+      $rawTagsReq = $flickr->tags_getListUserRaw();
+      $rawTags = array();
+
+      if ($rawTagsReq['stat'] == 'ok') {
+        foreach ($rawTagsReq['who']['tags']['tag'] as $tag) {
+          $rawTags[$tag['clean']] = $tag['raw'][0];
+        }
+      }
+      $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
+      $json = json_encode($imgs);
+      $cached .= $imgs;
+      file_put_contents($file, $json);
+      return $json;
+    }
+  } else {
+    return $cached;
+  }
 }
