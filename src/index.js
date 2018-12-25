@@ -18,6 +18,7 @@ import Logo from './js/components/Logo';
  */
 //const search = new Buscar();
 
+const main = document.querySelector('main');
 const logoConatiner = document.getElementById('homeLogo');
 let logo = document.getElementById('ptpLogo');
 let menu = document.getElementById('menu');
@@ -49,30 +50,24 @@ if (document.querySelector('.filter')) {
   if (typeof flickrData !== 'undefined' && flickrData.length) {
     console.log(flickrData);
     const params = getParams(window.location.search);
-    const filtersNav = document.getElementById('filtersNav');
     const tijera = new Tijera(flickrData);
 
-    let tagsEle = filtersNav.querySelector('.iconTags');
-    let imgsEle = filtersNav.querySelector('.iconImgs');
-    let abcEle = filtersNav.querySelector('.iconAbc');
-
-    if (params.filter === 'imgs') {
-      imgsEle.classList.add('active');
+    if (main.classList.contains('filterbyimage')) {
       new Tapiz(flickrData);
-    } else if (params.filter === 'abc') {
-      abcEle.classList.add('active');
+    } else if (main.classList.contains('filterbyindex')) {
       new Abc(tijera.sortTagsAlphabetically());
     } else if (params.filter === 'search') {
-      if (params.mode === 'term') {
-        tagsEle.classList.add('active');
-      }
+      // if (params.mode === 'term') {
+      //   tagsEle.classList.add('active');
+      // }
 
       new ResultadoBusqueda(params, tijera);
     } else {
-      tagsEle.classList.add('active');
       new Tags(tijera.getTagsByWeight(), document.getElementById('filtersContent'), tijera.maxTermCount);
     }
   }
-} else if (document.querySelector('.viz')) {
+}
+
+if (main.classList.contains('viz')) {
   new Mapa('GM22261');
 }
