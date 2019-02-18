@@ -11,9 +11,9 @@
     "start": "webpack-dev-server --mode development"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.2.3",
-    "autoprefixer": "^9.4.3",
+    "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "css-loader": "^2.0.2",
@@ -25,14 +25,14 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^2.1.0",
-    "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.0",
+    "webpack": "^4.29.4",
+    "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14",
     "write-file-webpack-plugin": "^4.4.1"
   },
   "dependencies": {
     "infinite-autocomplete": "^3.2.1",
     "justified-layout": "^2.1.1",
-    "lazysizes": "^4.1.5"
+    "lazysizes": "^4.1.6"
   }
 }
