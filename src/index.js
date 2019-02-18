@@ -6,9 +6,10 @@ import Tags from './js/components/Tags';
 import Mapa from './js/components/Mapa';
 import Tapiz from './js/components/Tapiz';
 import Abc from './js/components/Abc';
-import {getParams} from './js/utils/helpers';
+import { getParams } from './js/utils/helpers';
 import ResultadoBusqueda from './js/components/ResultadoBusqueda';
 import Logo from './js/components/Logo';
+import Typo from './js/components/Typo';
 //import Buscar from './js/utils/Buscar';
 
 /**
@@ -34,7 +35,8 @@ menu.onclick = () => {
 };
 
 function updateLogoSize() {
-  const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
+  const scrolled =
+    document.body.scrollTop || document.documentElement.scrollTop;
   if (scrolled > 50) {
     logo.style.height = '50px';
     logo.style.marginTop = '.3em';
@@ -54,7 +56,7 @@ if (logo) {
 
 if (document.querySelector('.filter')) {
   if (typeof flickrData !== 'undefined' && flickrData.length) {
-    console.log(flickrData);
+    // console.log(flickrData);
     const params = getParams(window.location.search);
     const tijera = new Tijera(flickrData);
 
@@ -65,11 +67,17 @@ if (document.querySelector('.filter')) {
     } else if (params.filter === 'search') {
       new ResultadoBusqueda(params, tijera);
     } else {
-      new Tags(tijera.getTagsByWeight(), document.getElementById('filtersContent'), tijera.maxTermCount);
+      new Tags(
+        tijera.getTagsByWeight(),
+        document.getElementById('filtersContent'),
+        tijera.maxTermCount
+      );
     }
   }
 }
 
 if (main.classList.contains('viz')) {
   new Mapa('GM22261');
+} else if (main.classList.contains('typo')) {
+  new Typo();
 }
