@@ -1,7 +1,8 @@
 <?php
 require_once 'Flickr.php';
 
-function getAllImages($flickr, $arr, $rawTags, $perPage, $page) {
+function getAllImages($flickr, $arr, $rawTags, $perPage, $page)
+{
   $flickrReq = $flickr->people_getPhotos('me', array(
     'per_page' => $perPage,
     'page' => $page,
@@ -28,11 +29,13 @@ function getAllImages($flickr, $arr, $rawTags, $perPage, $page) {
   }
 }
 
-function mapNumber($num, $in_min, $in_max, $out_min, $out_max) {
+function mapNumber($num, $in_min, $in_max, $out_min, $out_max)
+{
   return ($num - $in_min) * ($out_max - $out_min) / ($in_max - $in_min) + $out_min;
 }
 
-function normalize($string) {
+function normalize($string)
+{
   $table = array(
     'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z', 'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
     'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
@@ -47,34 +50,40 @@ function normalize($string) {
   return strtr($string, $table);
 }
 
-function getFlickrData($Automad) {
-  $file = realpath(__DIR__ . '/../_data/cacheflickr.json');
-  $Page = $Automad->Context->get();
-  $cached = file_get_contents($file);
+function getFlickrData($Automad)
+{
+  $data = '';
+  $filename = $_SERVER['DOCUMENT_ROOT'] . '/packages/ptp/papel/_data/flickrData.json';
 
-  if (empty($cached)) {
-    $apiKey = $Page->Shared->data['flickr_api_key'];
-    $apiSecret = $Page->Shared->data['flickr_api_secret'];
-    $flickr = new Flickr($apiKey, $apiSecret);
-
-    $logedIn = $flickr->requestOauthToken();
-
-    if ($logedIn) {
-      $rawTagsReq = $flickr->tags_getListUserRaw();
-      $rawTags = array();
-
-      if ($rawTagsReq['stat'] == 'ok') {
-        foreach ($rawTagsReq['who']['tags']['tag'] as $tag) {
-          $rawTags[$tag['clean']] = $tag['raw'][0];
-        }
-      }
-      $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
-      $json = json_encode($imgs);
-      $cached .= $imgs;
-      file_put_contents($file, $json);
-      return $json;
+  if (file_exists($filename)) {
+    // refresh data every 1 hour
+    if ((filemtime($filename) + 3600000) > time()) {
+      return file_get_contents($filename);
+    } else {
+      unlink($filename);
+      return getFlickrData($Automad);
     }
   } else {
-    return $cached;
+    $Page = $Automad->Context->get();
+    $apiKey = $Page->Shared->data['flickr_api_key'];
+    $apiSecret = $Page->Shared->data['flickr_api_secret'];
+    $oauthToken = $Page->Shared->data['oauth_token'];
+    $oauthSecret = $Page->Shared->data['oauth_secret'];
+    $flickr = new Flickr($apiKey, $apiSecret);
+    $flickr->setOauthToken($oauthToken, $oauthSecret);
+    $rawTagsReq = $flickr->tags_getListUserRaw();
+    $rawTags = array();
+
+    if ($rawTagsReq['stat'] == 'ok') {
+      foreach ($rawTagsReq['who']['tags']['tag'] as $tag) {
+        $rawTags[$tag['clean']] = $tag['raw'][0];
+      }
+    }
+
+    $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
+    $json = json_encode($imgs);
+
+    file_put_contents($filename, $json);
+    return $json;
   }
 }
