@@ -5,6 +5,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
+  devServer: {
+    allowedHosts: ['piedratijerapapel.test']
+  },
   module: {
     rules: [
       {
@@ -27,10 +30,8 @@ module.exports = {
               autoprefixer: {
                 browsers: ['last 2 versions']
               },
-              plugins: () => [
-                autoprefixer
-              ]
-            },
+              plugins: () => [autoprefixer]
+            }
           },
           {
             loader: 'sass-loader',
@@ -40,13 +41,15 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg|gif)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/'
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
           }
-        }]
+        ]
       }
     ]
   },
