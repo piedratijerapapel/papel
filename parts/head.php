@@ -1,4 +1,9 @@
-<?php defined('AUTOMAD') or die('Direct access not permitted!'); ?>
+<?php 
+defined('AUTOMAD') or die('Direct access not permitted!');
+
+require_once __DIR__ . '/../utils/helpers.php';
+$json = getFlickrData($Automad);
+?>
 <!DOCTYPE html>
 <html id="papel" lang="en">
 <head>
@@ -9,6 +14,10 @@
 	<@ favicons.php @>
 	<link href="/packages/ptp/papel/dist/main.css" rel="stylesheet">
   @{ itemsHeader }
+
+  <script>
+    var flickrData = <?php echo $json; ?>;
+  </script>
 </head>
 
 <body>
@@ -25,5 +34,5 @@
       <img id="ptpLogo" src="/shared/cuadratin.png" alt="PTP">
     </a>
   <@ end @>
-  <main class="@{ :template | sanitize } contentWrapper m-100 t-100 d-100 ld-100">
+  <main class="template-@{ :template | sanitize } contentWrapper m-100 t-100 d-100 ld-100">
     

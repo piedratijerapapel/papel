@@ -31,8 +31,8 @@
     "write-file-webpack-plugin": "^4.4.1"
   },
   "dependencies": {
-    "infinite-autocomplete": "^3.2.1",
     "justified-layout": "^2.1.1",
-    "lazysizes": "^4.1.6"
+    "lazysizes": "^4.1.6",
+    "match-sorter": "^2.3.0"
   }
 }

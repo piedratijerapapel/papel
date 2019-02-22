@@ -1,6 +1,7 @@
 import './main.scss';
 // lazysizes needs to be loaded globally
 import lazyload from 'lazysizes';
+import matchSorter, { rankings, caseRankings } from 'match-sorter';
 import Tijera from './js/utils/Tijera';
 import Tags from './js/components/Tags';
 import Mapa from './js/components/Mapa';
@@ -24,10 +25,22 @@ const logoConatiner = document.getElementById('homeLogo');
 let logo = document.getElementById('ptpLogo');
 let menu = document.getElementById('menu');
 let nav = document.querySelector('.navContent');
+let searchInput = document.getElementById('searchField');
 
 if (logoConatiner) {
   new Logo(logoConatiner);
 }
+
+console.log(flickrData);
+
+// new InfiniteAutocomplete(searchInput, {
+//   data: [
+//     { text: 'Islam Attrash', value: 1 },
+//     { text: 'Shai Reznik', value: 2 },
+//     { text: 'Uri Shaked', value: 3 },
+//     { text: 'Salsabel Eawissat', value: 4 }
+//   ]
+// });
 
 menu.onclick = () => {
   menu.classList.toggle('on');
@@ -54,15 +67,15 @@ if (logo) {
   };
 }
 
-if (document.querySelector('.filter')) {
+if (document.getElementById('filtersContent')) {
   if (typeof flickrData !== 'undefined' && flickrData.length) {
     // console.log(flickrData);
     const params = getParams(window.location.search);
     const tijera = new Tijera(flickrData);
 
-    if (main.classList.contains('filterbyimage')) {
+    if (main.classList.contains('template-filterbyimage')) {
       new Tapiz(flickrData);
-    } else if (main.classList.contains('filterbyindex')) {
+    } else if (main.classList.contains('template-filterbyindex')) {
       new Abc(tijera.sortTagsAlphabetically());
     } else if (params.filter === 'search') {
       new ResultadoBusqueda(params, tijera);
@@ -76,8 +89,8 @@ if (document.querySelector('.filter')) {
   }
 }
 
-if (main.classList.contains('viz')) {
+if (main.classList.contains('template-viz')) {
   new Mapa('GM22261');
-} else if (main.classList.contains('typo')) {
+} else if (main.classList.contains('template-typo')) {
   new Typo();
 }

@@ -78,12 +78,12 @@ function getFlickrData($Automad)
       foreach ($rawTagsReq['who']['tags']['tag'] as $tag) {
         $rawTags[$tag['clean']] = $tag['raw'][0];
       }
+
+      $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
+      $json = json_encode($imgs);
+
+      file_put_contents($filename, $json);
+      return $json;
     }
-
-    $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
-    $json = json_encode($imgs);
-
-    file_put_contents($filename, $json);
-    return $json;
   }
 }
