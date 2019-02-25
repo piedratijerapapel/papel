@@ -1,5 +1,5 @@
 <?php
-/* phpFlickr Class 3.1
+ /* phpFlickr Class 3.1
  * Written by Dan Coulter (dan@dancoulter.com)
  * Project Home Page: http://phpflickr.com/
  * Released under GNU Lesser General Public License (http://www.gnu.org/copyleft/lgpl.html)
@@ -217,13 +217,13 @@ class Flickr
     if (!empty($this->oauth_token) && !empty($this->oauth_secret)) {
       $data['oauth_consumer_key'] = $this->api_key;
       $data['oauth_timestamp'] = time();
-      $data['oauth_nonce'] = md5(uniqid(rand(), true));
+      $data['oauth_nonce'] = md5(uniqid(rand(0, getrandmax()), true));
       $data['oauth_signature_method'] = "HMAC-SHA1";
       $data['oauth_version'] = "1.0";
       $data['oauth_token'] = $this->oauth_token;
 
       if (!$data['oauth_signature'] = $this->getOauthSignature($url, $data))
-        return false;
+      return false;
     }
     return $data;
   }
@@ -234,10 +234,12 @@ class Flickr
       session_start();
     }
 
-    if (!isset($_SESSION['oauth_tokentmp']) ||
+    if (
+      !isset($_SESSION['oauth_tokentmp']) ||
       !isset($_SESSION['oauth_secrettmp']) ||
       $_SESSION['oauth_tokentmp'] == '' ||
-      $_SESSION['oauth_secrettmp'] == '') {
+      $_SESSION['oauth_secrettmp'] == ''
+    ) {
       $callback = 'http://' . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
       $this->getRequestToken($callback);
       return false;
@@ -255,7 +257,7 @@ class Flickr
     $data = array(
       'oauth_consumer_key' => $this->api_key,
       'oauth_timestamp' => time(),
-      'oauth_nonce' => md5(uniqid(rand(), true)),
+      'oauth_nonce' => md5(uniqid(rand(0, getrandmax()), true)),
       'oauth_signature_method' => 'HMAC-SHA1',
       'oauth_version' => '1.0',
       'oauth_callback' => $callback
@@ -303,7 +305,7 @@ class Flickr
     $data = array(
       'oauth_consumer_key' => $this->api_key,
       'oauth_timestamp' => time(),
-      'oauth_nonce' => md5(uniqid(rand(), true)),
+      'oauth_nonce' => md5(uniqid(rand(0, getrandmax()), true)),
       'oauth_signature_method' => "HMAC-SHA1",
       'oauth_version' => "1.0",
       'oauth_token' => $this->oauth_token,
@@ -342,7 +344,7 @@ class Flickr
     $adresse = 'POST&' . rawurlencode($url) . '&';
     $param = '';
     foreach ($data as $key => $value)
-      $param .= $key . '=' . rawurlencode($value) . '&';
+    $param .= $key . '=' . rawurlencode($value) . '&';
     $param = substr($param, 0, -1);
     $adresse .= rawurlencode($param);
 
@@ -486,7 +488,7 @@ class Flickr
       foreach ($rsp as $line) {
         if (preg_match('|<err code="([0-9]+)" msg="(.*)"|', $line, $match)) {
           if ($this->die_on_error)
-            die("The Flickr API returned the following error: #{$match[1]} - {$match[2]}");
+          die("The Flickr API returned the following error: #{$match[1]} - {$match[2]}");
           else {
             $this->error_code = $match[1];
             $this->error_msg = $match[2];
@@ -542,7 +544,7 @@ class Flickr
       foreach ($rsp as $line) {
         if (preg_match('|<err code="([0-9]+)" msg="(.*)"|', $line, $match)) {
           if ($this->die_on_error)
-            die("The Flickr API returned the following error: #{$match[1]} - {$match[2]}");
+          die("The Flickr API returned the following error: #{$match[1]} - {$match[2]}");
           else {
             $this->error_code = $match[1];
             $this->error_msg = $match[2];
@@ -598,16 +600,16 @@ class Flickr
       curl_close($curl);
 
       if ($async == 1)
-        $find = 'ticketid';
+      $find = 'ticketid';
       else
-        $find = 'photoid';
+      $find = 'photoid';
 
       $rsp = explode("\n", $response);
 
       foreach ($rsp as $line) {
         if (preg_match('|<err code="([0-9]+)" msg="(.*)"|', $line, $match)) {
           if ($this->die_on_error)
-            die("The Flickr API returned the following error: #{$match[1]} - {$match[2]}");
+          die("The Flickr API returned the following error: #{$match[1]} - {$match[2]}");
           else {
             $this->error_code = $match[1];
             $this->error_msg = $match[2];
@@ -864,10 +866,10 @@ class Flickr
     return $this->parsed_response ? $this->parsed_response['groups'] : false;
   }
 
-  function groups_pools_getPhotos($group_id, $tags = null, $user_id = null, $jump_to = null, $extras = null, $per_page = null, $page = null)
+  function groups_pools_getPhotos($group_id, $tags = null, $user_id = null, $jump_to = null, $extras = array(), $per_page = null, $page = null)
   {
     /* http://www.flickr.com/services/api/flickr.groups.pools.getPhotos.html */
-    if (is_array($extras)) {
+    if (!empty($extras)) {
       $extras = implode(",", $extras);
     }
     return $this->call('flickr.groups.pools.getPhotos', array('group_id' => $group_id, 'tags' => $tags, 'user_id' => $user_id, 'jump_to' => $jump_to, 'extras' => $extras, 'per_page' => $per_page, 'page' => $page));
@@ -881,11 +883,11 @@ class Flickr
   }
 
   /* Interestingness methods */
-  function interestingness_getList($date = null, $use_panda = null, $extras = null, $per_page = null, $page = null)
+  function interestingness_getList($date = null, $use_panda = null, $extras = array(), $per_page = null, $page = null)
   {
     /* http://www.flickr.com/services/api/flickr.interestingness.getList.html */
-    if (is_array($extras)) {
-      $extras = implode(",", $extras);
+    if (!empty($extras)) {
+      $extras = implode(',', $extras);
     }
 
     return $this->call('flickr.interestingness.getList', array('date' => $date, 'use_panda' => $use_panda, 'extras' => $extras, 'per_page' => $per_page, 'page' => $page));
@@ -970,7 +972,7 @@ class Flickr
      * list of arguments.
      */
 
-      /* http://www.flickr.com/services/api/flickr.people.getPhotos.html */
+    /* http://www.flickr.com/services/api/flickr.people.getPhotos.html */
     return $this->call('flickr.people.getPhotos', array_merge(array('user_id' => $user_id), $args));
   }
 
@@ -1084,11 +1086,11 @@ class Flickr
     return $this->parsed_response ? $this->parsed_response['perms'] : false;
   }
 
-  function photos_getRecent($jump_to = null, $extras = null, $per_page = null, $page = null)
+  function photos_getRecent($jump_to = null, $extras = array(), $per_page = null, $page = null)
   {
     /* http://www.flickr.com/services/api/flickr.photos.getRecent.html */
-    if (is_array($extras)) {
-      $extras = implode(",", $extras);
+    if ($extras && !empty($extras)) {
+      $extras = implode(',', $extras);
     }
     return $this->call('flickr.photos.getRecent', array('jump_to' => $jump_to, 'extras' => $extras, 'per_page' => $per_page, 'page' => $page));
   }
@@ -1850,4 +1852,3 @@ class Flickr
     return $this->parsed_response ? $this->parsed_response['user'] : false;
   }
 }
-
