@@ -69,7 +69,6 @@ if (logo) {
 
 if (document.getElementById('filtersContent')) {
   if (typeof flickrData !== 'undefined' && flickrData.length) {
-    // console.log(flickrData);
     const params = getParams(window.location.search);
     const tijera = new Tijera(flickrData);
 
@@ -90,7 +89,7 @@ if (document.getElementById('filtersContent')) {
 }
 
 if (main.classList.contains('template-viz')) {
-  new Mapa('GM22261');
+  new Mapa('verbo', 2, 4);
 } else if (main.classList.contains('template-typo')) {
   new Typo();
 }
