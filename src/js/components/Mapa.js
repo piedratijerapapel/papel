@@ -1,12 +1,13 @@
 export default class Map {
-  constructor(img) {
+  constructor(img, zoomMin, zoomMax) {
     const po = org.polymaps;
 
-    this.map = po.map()
+    this.map = po
+      .map()
       .container(document.getElementById('map').appendChild(po.svg('svg')))
-      .zoomRange([2, 6])
+      .zoomRange([zoomMin, zoomMax])
       .zoom(2)
-      .center({lat: 0, lon: 0})
+      .center({ lat: 0, lon: 0 })
       .add(po.image().url(this.tilestache(`/maps/${img}/{z}/{y}/{x}.png`)))
       .add(po.interact())
       .add(po.compass());
@@ -22,9 +23,12 @@ export default class Map {
 
       return template.replace(/{(.)}/g, (s, v) => {
         switch (v) {
-          case 'z': return c.zoom;
-          case 'x': return column;
-          case 'y': return c.row;
+          case 'z':
+            return c.zoom;
+          case 'x':
+            return column;
+          case 'y':
+            return c.row;
         }
         return v;
       });
