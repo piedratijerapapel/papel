@@ -50,6 +50,11 @@ function normalize($string)
   return strtr($string, $table);
 }
 
+function whatDate($t)
+{
+  return date("F d Y H:i:s.", $t);
+}
+
 function getFlickrData($Automad)
 {
   $data = '';
@@ -57,7 +62,7 @@ function getFlickrData($Automad)
 
   if (file_exists($filename)) {
     // refresh data every 1 hour
-    if ((filemtime($filename) + 3600000) > time()) {
+    if ((filemtime($filename) + 3600) > time()) {
       return file_get_contents($filename);
     } else {
       unlink($filename);
@@ -80,10 +85,13 @@ function getFlickrData($Automad)
       }
 
       $imgs = getAllImages($flickr, array(), $rawTags, 200, 1);
-      $json = json_encode($imgs);
 
-      file_put_contents($filename, $json);
-      return $json;
+      if ($imgs) {
+        $json = json_encode($imgs);
+
+        file_put_contents($filename, $json);
+        return $json;
+      }
     }
   }
 }
