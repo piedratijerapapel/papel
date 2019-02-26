@@ -1,19 +1,35 @@
 export default class Map {
-  constructor(img, zoomMin, zoomMax) {
+  constructor() {
+    const thumbs = document.querySelectorAll('.thumb');
+    this.container = document.getElementById('map');
+
+    thumbs.forEach(thumb => {
+      thumb.onclick = e => {
+        e.preventDefault();
+        this.container.innerText = '';
+        const name = thumb.dataset.name;
+        const maxZoom = +thumb.dataset.zoom;
+
+        this.load(name, 1, maxZoom);
+      };
+    });
+  }
+
+  load(name, zoomMin, zoomMax) {
     const po = org.polymaps;
 
     this.map = po
       .map()
-      .container(document.getElementById('map').appendChild(po.svg('svg')))
+      .container(this.container.appendChild(po.svg('svg')))
       .zoomRange([zoomMin, zoomMax])
       .zoom(2)
       .center({ lat: 0, lon: 0 })
-      .add(po.image().url(this.tilestache(`/maps/${img}/{z}/{y}/{x}.png`)))
+      .add(po.image().url(this.stitch(`/maps/${name}/{z}/{y}/{x}.png`)))
       .add(po.interact())
       .add(po.compass());
   }
 
-  tilestache(template) {
+  stitch(template) {
     return c => {
       const max = 1 << c.zoom;
       let column = c.column % max;
