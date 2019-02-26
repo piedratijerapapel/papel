@@ -1,6 +1,8 @@
 import Tapiz from './Tapiz';
 import Tags from './Tags';
-import {shuffleArray} from '../utils/helpers';
+import { shuffleArray } from '../utils/helpers';
+import Gallery from '../utils/Gallery';
+import matchSorter, { rankings } from 'match-sorter';
 
 export default class ResultadoBusqueda {
   constructor(params, tijera) {
@@ -12,6 +14,9 @@ export default class ResultadoBusqueda {
       this.buildTermPage();
     } else if (params.mode === 'img') {
       this.buildImgPage();
+      new Gallery('.imgContainer');
+    } else if (params.mode === 'q') {
+      this.buildQueryPage();
     }
   }
 
@@ -19,6 +24,17 @@ export default class ResultadoBusqueda {
     let data = this.tijera.getSingleTerm(this.params.val);
     this.buildTitle(data.name);
     new Tapiz(data.imgs);
+  }
+
+  buildQueryPage() {
+    let data = matchSorter(flickrData, this.params.val, {
+      threshold: rankings.WORD_STARTS_WITH,
+      keepDiacritics: true,
+      keys: ['description', 'title']
+    });
+
+    this.buildTitle(`Resultado de búsqueda: "${this.params.val}"`);
+    new Tapiz(data);
   }
 
   buildImgPage() {
@@ -29,6 +45,9 @@ export default class ResultadoBusqueda {
     let relatedImgs = document.createElement('section');
 
     imgContainer.className = 'singleSection imgContainer';
+    imgContainer.setAttribute('itemscope', '');
+    imgContainer.setAttribute('itemtype', 'http://schema.org/ImageGallery');
+
     imgData.className = 'singleSection imgData';
     tagsSection.className = 'singleSection tagsSection';
     relatedImgs.className = 'singleSection relatedImgs';
@@ -70,14 +89,61 @@ export default class ResultadoBusqueda {
       new Tapiz(related, relatedImgs);
     }
 
-    let bigImg = new Image();
-    bigImg.onload = () => {
-      let description = data.description.replace(/<b>/g, '</td></tr><tr class="dataRow"><td class="dataCol dataTitle">');
-      description = description.replace(/<\/b>/g, '</td><td class="dataCol dataValue">');
-      imgContainer.appendChild(bigImg);
-      imgData.insertAdjacentHTML('afterbegin', description);
-    };
-    bigImg.src = `https://farm${data.farm}.staticflickr.com/${data.server}/${data.id}_${data.secret}_b.jpg`;
+    const sizes = [
+      {
+        code: 'url_l',
+        size: 1240
+      },
+      {
+        code: 'url_h',
+        size: 1600
+      },
+      {
+        code: 'url_k',
+        size: 2048
+      }
+    ];
+
+    const maxSide = Math.max(+data.width_o, +data.height_o);
+    let ref = sizes[0];
+
+    sizes.forEach(obj => {
+      ref = obj.size < maxSide && obj.size > ref.size ? obj : ref;
+    });
+
+    const scale = ref.size / maxSide;
+    const w = Math.round(+data.width_o * scale);
+    const h = Math.round(+data.height_o * scale);
+    let figure = document.createElement('figure');
+    let link = document.createElement('a');
+    let img = new Image();
+
+    figure.setAttribute('itemprop', 'associatedMedia');
+    figure.setAttribute('itemscope', '');
+    figure.setAttribute('itemtype', 'http://schema.org/ImageObject');
+
+    link.href = data[ref.code];
+    link.setAttribute('itemprop', 'contentUrl');
+    link.dataset.size = `${w}x${h}`;
+
+    img.setAttribute('itemprop', 'thumbnail');
+    img.src = `https://farm${data.farm}.staticflickr.com/${data.server}/${
+      data.id
+    }_${data.secret}.jpg`;
+
+    link.appendChild(img);
+    figure.appendChild(link);
+    imgContainer.appendChild(figure);
+
+    let description = data.description.replace(
+      /<b>/g,
+      '</td></tr><tr class="dataRow"><td class="dataCol dataTitle">'
+    );
+    description = description.replace(
+      /<\/b>/g,
+      '</td><td class="dataCol dataValue">'
+    );
+    imgData.insertAdjacentHTML('afterbegin', description);
   }
 
   buildTitle(name) {
