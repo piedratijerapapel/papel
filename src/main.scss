@@ -1,24 +1,24 @@
-@import 'scss/utils/vars.scss';
-
+@import 'scss/utils/vars';
+@import 'scss/utils/gallery';
+@import 'scss/utils/gallerySkin';
 #papel {
   box-sizing: border-box;
   font-family: $fontSerif;
   font-size: 1rem;
-  font-weight: bold;
   line-height: 1.7;
   color: black;
   background: white;
   margin: 0;
-  @import 'scss/utils/general.scss';
-  @import 'scss/utils/grid.scss';
-  @import 'scss/breakpoints/base.scss';
+  @import 'scss/utils/general';
+  @import 'scss/utils/grid';
+  @import 'scss/breakpoints/base';
   @media only screen and (min-width: 768px) {
-    @import 'scss/breakpoints/768up.scss';
+    @import 'scss/breakpoints/768up';
   }
   @media only screen and (min-width: 1030px) {
-    @import 'scss/breakpoints/1030up.scss';
+    @import 'scss/breakpoints/1030up';
   }
   @media only screen and (min-width: 1240px) {
-    @import 'scss/breakpoints/1240up.scss';
+    @import 'scss/breakpoints/1240up';
   }
 }
