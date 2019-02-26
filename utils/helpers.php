@@ -6,7 +6,7 @@ function getAllImages($flickr, $arr, $rawTags, $perPage, $page)
   $flickrReq = $flickr->people_getPhotos('me', array(
     'per_page' => $perPage,
     'page' => $page,
-    'extras' => 'description,tags,url_o,o_dims',
+    'extras' => 'description,tags,url_o,o_dims,url_l,url_h,url_k',
   ));
 
   if ($flickrReq['stat'] == 'ok') {
