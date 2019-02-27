@@ -102,11 +102,15 @@
   }
   .mainNav {
     font-family: $fontBold;
+    line-height: 1;
+    li {
+      padding: 0.3em 0;
+    }
     li.active {
       font-style: italic;
     }
-    li .subNav {
-      line-height: 1;
+    li .subNav li {
+      padding: 0;
     }
   }
 }
@@ -146,7 +150,6 @@ main {
   .logosWrapper {
     width: 90%;
     .homeContentLogo {
-      //width: 100%;
       height: auto;
     }
   }
