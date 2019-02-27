@@ -1,8 +1,7 @@
 <?php
 require_once 'Flickr.php';
 
-function getAllImages($flickr, $arr, $rawTags, $perPage, $page)
-{
+function getAllImages($flickr, $arr, $rawTags, $perPage, $page) {
   $flickrReq = $flickr->people_getPhotos('me', array(
     'per_page' => $perPage,
     'page' => $page,
@@ -29,13 +28,11 @@ function getAllImages($flickr, $arr, $rawTags, $perPage, $page)
   }
 }
 
-function mapNumber($num, $in_min, $in_max, $out_min, $out_max)
-{
+function mapNumber($num, $in_min, $in_max, $out_min, $out_max) {
   return ($num - $in_min) * ($out_max - $out_min) / ($in_max - $in_min) + $out_min;
 }
 
-function normalize($string)
-{
+function normalize($string) {
   $table = array(
     'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z', 'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
     'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
@@ -50,13 +47,11 @@ function normalize($string)
   return strtr($string, $table);
 }
 
-function whatDate($t)
-{
+function whatDate($t) {
   return date("F d Y H:i:s.", $t);
 }
 
-function getFlickrData($Automad)
-{
+function getFlickrData($Automad) {
   $data = '';
   $filename = $_SERVER['DOCUMENT_ROOT'] . '/packages/ptp/papel/_data/flickrData.json';
 
