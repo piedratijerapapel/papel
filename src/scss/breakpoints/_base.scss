@@ -162,15 +162,15 @@ main {
   padding: 0;
   margin-right: 0.3em;
   line-height: 1;
-  color: black !important;
+  //color: black !important;
   font-family: $fontBold;
   font-weight: 800;
   font-style: normal;
   cursor: pointer;
-  &:focus,
-  &:hover {
-    color: black;
-  }
+  // &:focus,
+  // &:hover {
+  //   color: black;
+  // }
 }
 
 #filtersNav {
