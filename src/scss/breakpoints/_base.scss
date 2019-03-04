@@ -4,7 +4,7 @@
   background-color: white;
   z-index: 8;
   #search {
-    margin-right: 2em;
+    margin: 0 2em 1em 0;
     input {
       background: transparent;
       border-bottom: 1px solid black;
@@ -162,15 +162,10 @@ main {
   padding: 0;
   margin-right: 0.3em;
   line-height: 1;
-  //color: black !important;
   font-family: $fontBold;
   font-weight: 800;
   font-style: normal;
   cursor: pointer;
-  // &:focus,
-  // &:hover {
-  //   color: black;
-  // }
 }
 
 #filtersNav {
@@ -201,6 +196,10 @@ main {
   }
   .filterByIndex a {
     background-image: url('assets/icon-abc.svg');
+    background-size: 70%;
+  }
+  .filterByCategory a {
+    background-image: url('assets/icon-cat.svg');
     background-size: 70%;
   }
   .filterByTag a {
