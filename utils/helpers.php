@@ -57,6 +57,7 @@ function getFlickrData($Automad) {
 
   if (file_exists($filename)) {
     // refresh data every 1 hour
+    // var_dump((whatDate(filemtime($filename) + 3600)), whatDate(time()));
     if ((filemtime($filename) + 3600) > time()) {
       return file_get_contents($filename);
     } else {
