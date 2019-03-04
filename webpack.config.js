@@ -6,7 +6,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
   devServer: {
-    allowedHosts: ['piedratijerapapel.test']
+    allowedHosts: ['piedratijerapapel.test', 'piedratijerapapel.com']
   },
   module: {
     rules: [
