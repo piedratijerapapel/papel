@@ -11,6 +11,7 @@ import ResultadoBusqueda from './js/components/ResultadoBusqueda';
 import Logo from './js/components/Logo';
 import Typo from './js/components/Typo';
 import Buscar from './js/utils/Buscar';
+import Categories from './js/components/Categories';
 
 const tijera = new Tijera(flickrData);
 const main = document.querySelector('main');
@@ -58,6 +59,8 @@ if (document.getElementById('filtersContent')) {
       new Tapiz(flickrData);
     } else if (main.classList.contains('template-filterbyindex')) {
       new Abc(tijera.sortTagsAlphabetically());
+    } else if (main.classList.contains('template-filterbycategory')) {
+      new Categories(tijera.categories);
     } else if (params.filter === 'search') {
       new ResultadoBusqueda(params, tijera);
     } else {

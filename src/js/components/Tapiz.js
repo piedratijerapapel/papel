@@ -1,5 +1,5 @@
 import layoutGeometry from 'justified-layout';
-import {shuffleArray} from '../utils/helpers';
+import { shuffleArray } from '../utils/helpers';
 
 export default class Tapiz {
   constructor(imgsData, container) {
@@ -19,7 +19,9 @@ export default class Tapiz {
       imgRatios.push(d.width_o / d.height_o);
 
       img.className = 'lazyload';
-      img.dataset.src = `https://farm${d.farm}.staticflickr.com/${d.server}/${d.id}_${d.secret}.jpg`;
+      img.dataset.src = `https://farm${d.farm}.staticflickr.com/${d.server}/${
+        d.id
+      }_${d.secret}.jpg`;
       imgs.push(link);
     });
 
@@ -36,9 +38,5 @@ export default class Tapiz {
       ele.style.height = `${data.height}px`;
       this.container.appendChild(ele);
     });
-  }
-
-  clear() {
-    this.container.innerText = '';
   }
 }

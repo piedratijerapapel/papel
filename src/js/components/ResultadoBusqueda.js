@@ -17,6 +17,8 @@ export default class ResultadoBusqueda {
       new Gallery('.imgContainer');
     } else if (params.mode === 'q') {
       this.buildQueryPage();
+    } else if (params.mode === 'category') {
+      this.buildCategoryPage();
     }
   }
 
@@ -24,6 +26,14 @@ export default class ResultadoBusqueda {
     let data = this.tijera.getSingleTerm(this.params.val);
     this.buildTitle(data.name);
     new Tapiz(data.imgs);
+  }
+
+  buildCategoryPage() {
+    const k1 = this.params.key1;
+    const k2 = this.params.key2;
+    const k3 = this.params.key3;
+    this.buildTitle(`${k1} - ${k2}: ${k3}`);
+    new Tapiz(this.tijera.categories[k1][k2][k3]);
   }
 
   buildQueryPage() {

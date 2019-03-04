@@ -156,11 +156,12 @@ main {
 }
 
 .tagName,
-.abcTerm {
+.abcTerm,
+.categoryName {
   display: inline-block;
   vertical-align: baseline;
   padding: 0;
-  margin-right: 0.3em;
+  margin-right: 0.8em;
   line-height: 1;
   font-family: $fontBold;
   font-weight: 800;
@@ -347,6 +348,10 @@ main {
       display: inline;
     }
   }
+}
+
+.categoryWrapper2 {
+  padding: 0 1.5em;
 }
 
 .default {
