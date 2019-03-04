@@ -8,20 +8,26 @@ $json = getFlickrData($Automad);
 <html id="papel" lang="en">
 
 <head>
+  <script>var flickrData = <?php echo $json; ?></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@{ sitename } | @{ title | def('404') }</title>
   <@ favicons.php @>
+  <@ og.php @>
   <link href="/packages/ptp/papel/dist/main.css" rel="stylesheet">
   @{ itemsHeader }
-
-  <script>var flickrData = <?php echo $json; ?></script>
 </head>
 
 <body>
   <header id="siteHeader" class="gridWrapper gridJustifySpaceBetween">
     <span id="menu"><span></span></span>
+
+    <@if @{:template} !='papel' @>
+    <a href="/" id="ptpLogoWrapper">
+      <img id="ptpLogo" src="/shared/cuadratin.png" alt="PTP">
+    </a>
+    <@ end @>
     
     <div id="search">
       <input id="searchField" type="search" placeholder="Buscar">
@@ -31,9 +37,5 @@ $json = getFlickrData($Automad);
   </header>
   
   <@ nav.php @>
-  <@if @{:template} !='papel' @>
-  <a href="/" id="ptpLogoWrapper">
-    <img id="ptpLogo" src="/shared/cuadratin.png" alt="PTP">
-  </a>
-  <@ end @>
+  
   <main class="template-@{ :template | sanitize } m-100 t-100 d-100 ld-100"> 
