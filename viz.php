@@ -14,7 +14,7 @@ foreach ($list as $name) {
     $levels = array_diff(scandir($base), array('..', '.'));
 
     $thumbs[$name] = array(
-      'url' => $_ . 'maps' . $_ . $name . $_ . '0' . $_ . '0' . $_ . '0.png',
+      'url' => $_ . 'maps' . $_ . $name . $_ . '0' . $_ . '0' . $_ . '0.jpg',
       'zoom' => end($levels)
     );
   }

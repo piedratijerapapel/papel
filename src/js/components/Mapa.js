@@ -24,7 +24,7 @@ export default class Map {
       .zoomRange([zoomMin, zoomMax])
       .zoom(2)
       .center({ lat: 0, lon: 0 })
-      .add(po.image().url(this.stitch(`/maps/${name}/{z}/{y}/{x}.png`)))
+      .add(po.image().url(this.stitch(`/maps/${name}/{z}/{y}/{x}.jpg`)))
       .add(po.interact())
       .add(po.compass());
   }
